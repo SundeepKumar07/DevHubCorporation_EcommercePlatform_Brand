@@ -1,0 +1,313 @@
+// scripts/seed.ts
+import mongoose from "mongoose";
+import * as dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
+
+const MONGODB_URI = process.env.MONGODB_URI!;
+
+// ── Product schema (inline for script) ──
+const ProductSchema = new mongoose.Schema(
+  {
+    name:        String,
+    description: String,
+    price:       Number,
+    oldPrice:    Number,
+    discount:    Number,
+    image:       String,
+    category:    String,
+    brand:       String,
+    stock:       Number,
+    rating:      Number,
+    reviews:     Number,
+    shipping:    String,
+    featured:    Boolean,
+  },
+  { timestamps: true }
+);
+
+const Product =
+  mongoose.models.Product ?? mongoose.model("Product", ProductSchema);
+
+// ── Seed data ──
+const seedProducts = [
+  {
+    name:        "Apple Smart Watch Series X",
+    description: "Premium Apple smartwatch with fitness tracking and smart notifications.",
+    price:       299,
+    oldPrice:    349,
+    discount:    15,
+    image:       "/images/tech/smartwatch.png",
+    category:    "Electronics",
+    brand:       "Apple",
+    stock:       20,
+    rating:      4.8,
+    reviews:     125,
+    shipping:    "Free Shipping",
+    featured:    true,
+  },
+  {
+    name:        "Wireless Gaming Headphones",
+    description: "Noise cancellation gaming headphones with premium sound quality.",
+    price:       149,
+    oldPrice:    199,
+    discount:    25,
+    image:       "/images/tech/headphones.png",
+    category:    "Gaming",
+    brand:       "Sony",
+    stock:       14,
+    rating:      4.7,
+    reviews:     88,
+    shipping:    "Free Shipping",
+    featured:    true,
+  },
+  {
+    name:        "Ultra HD Professional Camera",
+    description: "Professional DSLR camera for photography and cinematic videos.",
+    price:       899,
+    oldPrice:    999,
+    discount:    10,
+    image:       "/images/tech/camera.png",
+    category:    "Electronics",
+    brand:       "Canon",
+    stock:       8,
+    rating:      4.9,
+    reviews:     66,
+    shipping:    "Fast Delivery",
+    featured:    true,
+  },
+  {
+    name:        "RGB Mechanical Keyboard",
+    description: "Mechanical gaming keyboard with customizable RGB lighting.",
+    price:       119,
+    oldPrice:    149,
+    discount:    20,
+    image:       "/images/tech/keyboard.png",
+    category:    "Gaming",
+    brand:       "Logitech",
+    stock:       25,
+    rating:      4.6,
+    reviews:     72,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+  {
+    name:        "Premium Bluetooth Speaker",
+    description: "Portable bluetooth speaker with deep bass and long battery backup.",
+    price:       89,
+    oldPrice:    120,
+    discount:    30,
+    image:       "/images/tech/speaker.png",
+    category:    "Electronics",
+    brand:       "JBL",
+    stock:       18,
+    rating:      4.5,
+    reviews:     53,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+  {
+    name:        "Gaming Monitor 144Hz",
+    description: "High refresh rate gaming monitor with ultra smooth visuals.",
+    price:       349,
+    oldPrice:    399,
+    discount:    12,
+    image:       "/images/tech/monitor.png",
+    category:    "Gaming",
+    brand:       "ASUS",
+    stock:       10,
+    rating:      4.8,
+    reviews:     47,
+    shipping:    "Fast Delivery",
+    featured:    false,
+  },
+  {
+    name:        "Smartphone Pro Max",
+    description: "Latest flagship smartphone with premium camera and display.",
+    price:       1099,
+    oldPrice:    1199,
+    discount:    10,
+    image:       "/images/tech/smartphone.png",
+    category:    "Electronics",
+    brand:       "Samsung",
+    stock:       7,
+    rating:      4.9,
+    reviews:     104,
+    shipping:    "Free Shipping",
+    featured:    true,
+  },
+  {
+    name:        "Wireless Earbuds",
+    description: "Compact wireless earbuds with excellent battery performance.",
+    price:       79,
+    oldPrice:    99,
+    discount:    18,
+    image:       "/images/tech/earbuds.png",
+    category:    "Electronics",
+    brand:       "Xiaomi",
+    stock:       30,
+    rating:      4.4,
+    reviews:     39,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+  {
+    name:        "Gaming Mouse RGB",
+    description: "Professional gaming mouse with customizable RGB effects.",
+    price:       59,
+    oldPrice:    79,
+    discount:    20,
+    image:       "/images/tech/mouse.png",
+    category:    "Gaming",
+    brand:       "Razer",
+    stock:       40,
+    rating:      4.5,
+    reviews:     45,
+    shipping:    "Fast Delivery",
+    featured:    false,
+  },
+  {
+    name:        "Luxury Modern Sofa",
+    description: "Modern luxury sofa designed for comfort and elegance.",
+    price:       799,
+    oldPrice:    899,
+    discount:    15,
+    image:       "/images/interior/sofa.png",
+    category:    "Furniture",
+    brand:       "IKEA",
+    stock:       6,
+    rating:      4.7,
+    reviews:     22,
+    shipping:    "Free Shipping",
+    featured:    true,
+  },
+  {
+    name:        "Wooden Dining Chair",
+    description: "Minimal wooden chair suitable for modern interiors.",
+    price:       129,
+    oldPrice:    159,
+    discount:    18,
+    image:       "/images/interior/chair.png",
+    category:    "Furniture",
+    brand:       "Habitt",
+    stock:       20,
+    rating:      4.3,
+    reviews:     19,
+    shipping:    "Fast Delivery",
+    featured:    false,
+  },
+  {
+    name:        "Decorative Table Lamp",
+    description: "Beautiful decorative lamp for home and office setup.",
+    price:       89,
+    oldPrice:    110,
+    discount:    15,
+    image:       "/images/interior/lamp.png",
+    category:    "Decor",
+    brand:       "Philips",
+    stock:       15,
+    rating:      4.6,
+    reviews:     33,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+  {
+    name:        "Office Work Desk",
+    description: "Modern office desk with premium wood finish.",
+    price:       349,
+    oldPrice:    420,
+    discount:    20,
+    image:       "/images/interior/desk.png",
+    category:    "Furniture",
+    brand:       "IKEA",
+    stock:       12,
+    rating:      4.5,
+    reviews:     28,
+    shipping:    "Fast Delivery",
+    featured:    false,
+  },
+  {
+    name:        "Minimal Bed Design",
+    description: "Luxury minimal bed frame with premium build quality.",
+    price:       899,
+    oldPrice:    999,
+    discount:    10,
+    image:       "/images/interior/bed.png",
+    category:    "Furniture",
+    brand:       "Habitt",
+    stock:       4,
+    rating:      4.8,
+    reviews:     17,
+    shipping:    "Free Shipping",
+    featured:    true,
+  },
+  {
+    name:        "Classic Wall Decor",
+    description: "Elegant wall decor for modern living rooms.",
+    price:       79,
+    oldPrice:    99,
+    discount:    15,
+    image:       "/images/interior/wall-decor.png",
+    category:    "Decor",
+    brand:       "DecorX",
+    stock:       26,
+    rating:      4.4,
+    reviews:     21,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+  {
+    name:        "Interior Flower Vase",
+    description: "Modern flower vase for aesthetic room decoration.",
+    price:       45,
+    oldPrice:    65,
+    discount:    25,
+    image:       "/images/interior/vase.png",
+    category:    "Decor",
+    brand:       "HomeStyle",
+    stock:       32,
+    rating:      4.2,
+    reviews:     13,
+    shipping:    "Fast Delivery",
+    featured:    false,
+  },
+  {
+    name:        "Luxury Coffee Table",
+    description: "Stylish coffee table for premium interiors.",
+    price:       259,
+    oldPrice:    320,
+    discount:    18,
+    image:       "/images/interior/coffee-table.png",
+    category:    "Furniture",
+    brand:       "IKEA",
+    stock:       9,
+    rating:      4.7,
+    reviews:     24,
+    shipping:    "Free Shipping",
+    featured:    false,
+  },
+];
+
+async function seed() {
+  try {
+    console.log("⏳ Connecting to MongoDB...");
+    await mongoose.connect(MONGODB_URI);
+    console.log("✅ Connected to MongoDB");
+
+    // Clear existing
+    await Product.deleteMany({});
+    console.log("🗑️  Cleared existing products");
+
+    // Insert all
+    const inserted = await Product.insertMany(seedProducts);
+    console.log(`✅ Seeded ${inserted.length} products successfully`);
+
+  } catch (error) {
+    console.error("❌ Seed failed:", error);
+  } finally {
+    await mongoose.disconnect();
+    console.log("🔌 Disconnected from MongoDB");
+    process.exit(0);
+  }
+}
+
+seed();
